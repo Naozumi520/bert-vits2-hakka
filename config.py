@@ -4,7 +4,7 @@
 
 import argparse
 import yaml
-from typing import Dict, List
+from typing import Dict, List, Literal
 import os
 import shutil
 import sys
@@ -42,6 +42,7 @@ class Preprocess_text_config:
         val_per_lang: int = 5,
         max_val_total: int = 10000,
         clean: bool = True,
+        mode: Literal["standard", "minimal", "ipa"] = "standard",
     ):
         self.transcription_path: str = (
             transcription_path  # 原始文本文件路径，文本格式应为{wav_path}|{speaker_name}|{language}|{text}。
@@ -61,6 +62,7 @@ class Preprocess_text_config:
             max_val_total  # 验证集最大条数，多于的会被截断并放到训练集中
         )
         self.clean: bool = clean  # 是否进行数据清洗
+        self.mode: Literal["standard", "minimal", "ipa"] = mode  # g2p mode
 
     @classmethod
     def from_dict(cls, dataset_path: str, data: Dict[str, any]):

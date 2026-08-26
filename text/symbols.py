@@ -1,111 +1,28 @@
-punctuation = ["!", "?", "…", ",", ".", "'", "-"]
-pu_symbols = punctuation + ["SP", "UNK"]
+from config import config
+
+# Follows the order in ToJyutping.g2p
+punctuation = ["…", ".", ",", "!", "?", "-", "'"]
+pu_symbols = punctuation  # + ["SP", "UNK"]
 pad = "_"
-silent = "#"
 
-# hakka
-
-hakka_symbols = [
-    "a",
-    "aa",
-    "aai",
-    "aak",
-    "aam",
-    "aan",
-    "aang",
-    "aap",
-    "aat",
-    "aau",
-    "ai",
-    "ak",
-    "am",
-    "an",
-    "ang",
-    "ap",
-    "at",
-    "au",
-    "b",
-    "c",
-    "d",
-    "e",
-    "ei",
-    "ek",
-    "eng",
-    "eoi",
-    "eon",
-    "eot",
-    "eu",
-    "em",
-    "en",
-    "ep",
-    "et",
-    "f",
-    "g",
-    "gw",
-    "h",
-    "i",
-    "ik",
-    "im",
-    "in",
-    "ing",
-    "ip",
-    "it",
-    "iu",
-    "y",
-    "k",
-    "kw",
-    "l",
-    "m",
-    "n",
-    "ng",
-    "o",
-    "oe",
-    "oek",
-    "oeng",
-    "oi",
-    "ok",
-    "on",
-    "ong",
-    "ot",
-    "ou",
-    "p",
-    "s",
-    "sil",
-    "sp",
-    "spl",
-    "t",
-    "u",
-    "ui",
-    "uk",
-    "un",
-    "ung",
-    "ut",
-    "v",
-    "w",
-    "yu",
-    "yun",
-    "yut",
-    "z",
-]
-num_hakka_tones = 7
+# Cantonese: Symbols are already mapped internally in ToJyutping.g2p
+# Generates identity mappings for `len(symbols)` to work correctly
+yue_symbols = list(range({"standard": 88, "minimal": 29, "ipa": 0}[config.preprocess_text_config.mode]))
+num_yue_tones = 6
 
 # combine all symbols
-normal_symbols = sorted(set(hakka_symbols))
-symbols = [pad] + normal_symbols + pu_symbols + [silent]
-symbols = symbols + sorted((set(hakka_symbols) - set(symbols)))
-sil_phonemes_ids = [symbols.index(i) for i in pu_symbols]
+symbols = [pad] + pu_symbols
+yue_offset = len(symbols)  # For use by ToJyutping.g2p in cleaner.py
+symbols += yue_symbols
 
 # combine all tones
-num_tones = num_hakka_tones
+num_tones = num_yue_tones
 
 # language maps
-language_id_map = {"HAKKA": 0}
-num_languages = len(language_id_map.keys())
+language_id_map = {"YUE": 0, "HAK": 0}
+num_languages = 1
 
 language_tone_start_map = {
-    "HAKKA": 0,
+    "YUE": 0,
+    "HAK": 0,
 }
-
-if __name__ == "__main__":
-    a = set(hakka_symbols)
-    print(sorted(a))

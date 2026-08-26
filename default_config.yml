@@ -41,6 +41,8 @@ preprocess_text:
   max_val_total: 12
   # 是否进行数据清洗
   clean: true
+  # g2p mode. Valid values: "standard", "minimal", "ipa"
+  mode: "standard"
 
 
 # bert_gen 相关配置
@@ -135,7 +137,7 @@ server:
       # 模型使用设备，若填写则会覆盖默认配置
       device: "cuda"
       # 模型默认使用的语言
-      language: "HAKKA"
+      language: "HAK"
       # 模型人物默认参数
       # 不必填写所有人物，不填的使用默认值
       # 暂时不用填写，当前尚未实现按人区分配置

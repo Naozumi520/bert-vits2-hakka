@@ -10,6 +10,8 @@ from text.cleaner import clean_text
 from config import config
 from infer import latest_version
 
+target_language_map = {"YUE": "HAK"}
+
 preprocess_text_config = config.preprocess_text_config
 
 
@@ -61,7 +63,7 @@ def preprocess(
                                 "{}|{}|{}|{}|{}|{}|{}\n".format(
                                     utt,
                                     spk,
-                                    language,
+                                    target_language_map.get(language, language),
                                     norm_text,
                                     " ".join(phones),
                                     " ".join([str(i) for i in tones]),

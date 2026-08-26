@@ -8,6 +8,7 @@ import subprocess
 import numpy as np
 from huggingface_hub import hf_hub_download
 from scipy.io.wavfile import read
+from text.symbols import symbols
 import torch
 import re
 
@@ -422,8 +423,7 @@ class HParams:
 def load_model(model_path, config_path):
     hps = get_hparams_from_file(config_path)
     net = SynthesizerTrn(
-        # len(symbols),
-        108,
+        len(symbols),
         hps.data.filter_length // 2 + 1,
         hps.train.segment_size // hps.data.hop_length,
         n_speakers=hps.data.n_speakers,

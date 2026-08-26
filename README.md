@@ -26,7 +26,8 @@ audio_path|speaker_name|language_id|phoneme
 Example:
 
 ```text
-raw/speaker_001.wav|speaker|HAKKA|miau4 geu3 giet5 yen4
+raw/speaker_yue_001.wav|speaker|YUE|貓狗結怨
+raw/speaker_hak_001.wav|speaker|HAK|miau4 geu3 giet5 yen4
 ```
 
 ## Preprocess the Dataset
